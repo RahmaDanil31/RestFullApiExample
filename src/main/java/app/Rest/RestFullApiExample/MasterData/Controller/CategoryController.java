@@ -1,6 +1,5 @@
 package app.Rest.RestFullApiExample.MasterData.Controller;
 
-import app.Rest.RestFullApiExample.Helper.Mapper.ObjectHelper;
 import app.Rest.RestFullApiExample.MasterData.DTO.CategoryDto;
 import app.Rest.RestFullApiExample.MasterData.Model.Category;
 import app.Rest.RestFullApiExample.MasterData.Service.CategoryService;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/category")
-public class CategoryController {
+public class CategoryController{
 
     @Autowired
     private CategoryService service;
@@ -26,19 +25,33 @@ public class CategoryController {
         return service.getAllCategories();
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody CategoryDto dto, Errors errors){
 
-        ResponseData<Category> responseData = new ResponseData<>();
+        ResponseData<CategoryDto> responseData = new ResponseData<>();
 
         if (errors.hasErrors()) {
-            responseData.setDefaultMessage(errors.getFieldError().getDefaultMessage());
-            responseData.setStatus(false);
+            responseData.setMessage(errors.getFieldError().getDefaultMessage());
+            responseData.setStatus(HttpStatus.BAD_REQUEST);
             return new ResponseEntity(responseData, HttpStatus.BAD_REQUEST);
         }
 
-        responseData.setPayload(service.save(ObjectHelper.convert(dto,Category.class)));
+        responseData.setData(service.save(dto));
 
         return ResponseEntity.ok(responseData);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+
+        ResponseData<CategoryDto> responseData = new ResponseData<>();
+        responseData.setData(service.loadById(id));
+
+        return ResponseEntity.ok(responseData);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        service.delete(id);
     }
 }

@@ -1,7 +1,9 @@
 package app.Rest.RestFullApiExample.MasterData.DTO;
 
-import app.Rest.RestFullApiExample.Helper.Model.DtoId;
+import app.Rest.RestFullApiExample.Helper.Model.AuditDto;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
@@ -10,8 +12,9 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public class CategoryDto extends DtoId {
+public class CategoryDto extends AuditDto {
 
+    @NotNull
     @NotEmpty(message = "name cannot empty")
     @Size(min=3,message = "category name minimum 3 character ")
     private String name;

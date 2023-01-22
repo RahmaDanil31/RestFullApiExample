@@ -1,15 +1,14 @@
 package app.Rest.RestFullApiExample.Validation.ErrorHandling;
 
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
 public class ResponseData<T> {
 
-    public static final String message = "succees";
-
-    private String defaultMessage = message;
-    private boolean status = true;
-    private T payload;
+    private String message = "succees";
+    private HttpStatus status = HttpStatus.OK;
+    private T data;
 
 }

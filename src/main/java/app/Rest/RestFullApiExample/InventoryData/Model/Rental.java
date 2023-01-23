@@ -1,9 +1,10 @@
 package app.Rest.RestFullApiExample.InventoryData.Model;
 
 import app.Rest.RestFullApiExample.Helper.Model.Audit;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity

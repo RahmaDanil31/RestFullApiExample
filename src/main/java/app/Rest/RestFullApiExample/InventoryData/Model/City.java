@@ -1,13 +1,13 @@
 package app.Rest.RestFullApiExample.InventoryData.Model;
 
 import app.Rest.RestFullApiExample.Helper.Model.Audit;
-import app.Rest.RestFullApiExample.MasterData.Model.Category;
 import app.Rest.RestFullApiExample.MasterData.Model.Country;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "city")

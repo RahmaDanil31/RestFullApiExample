@@ -3,13 +3,12 @@ package app.Rest.RestFullApiExample.MasterData.Model;
 import app.Rest.RestFullApiExample.Helper.Model.Audit;
 import app.Rest.RestFullApiExample.InventoryData.Model.Film;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity

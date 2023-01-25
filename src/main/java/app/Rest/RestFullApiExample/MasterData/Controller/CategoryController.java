@@ -36,12 +36,12 @@ public class CategoryController{
             return new ResponseEntity(responseData, HttpStatus.BAD_REQUEST);
         }
 
-        responseData.setData(service.save(dto));
+        responseData.setData(service.saveOrUpdate(dto));
 
         return ResponseEntity.ok(responseData);
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
 
         ResponseData<CategoryDto> responseData = new ResponseData<>();

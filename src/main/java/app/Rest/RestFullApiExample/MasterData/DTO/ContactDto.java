@@ -1,46 +1,31 @@
-package app.Rest.RestFullApiExample.MasterData.Model;
+package app.Rest.RestFullApiExample.MasterData.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-@Entity
-@Table(name = "contacts")
 @Getter
 @Setter
-public class Contacts {
-
-    //menambahkan uuid
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "contact_id", updatable = false, nullable = false)
+public class ContactDto {
     private UUID id;
 
     @NotBlank
     @Size(min = 3)
-    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank
     @Size(min = 3)
-    @Column(name = "last_name")
     private String lastName;
 
     @NotBlank
     @Email(message="Please provide a valid email address")
-    @Column(name = "email")
     private String email;
 
     @NotBlank
     @Size(min = 3)
-    @Column(name = "phone")
     private String phone;
-
 }

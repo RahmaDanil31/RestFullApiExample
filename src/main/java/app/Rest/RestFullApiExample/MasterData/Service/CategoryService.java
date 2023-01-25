@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CategoryService implements ServiceImpl<CategoryDto> {
@@ -22,7 +23,7 @@ public class CategoryService implements ServiceImpl<CategoryDto> {
     }
 
     @Override
-    public CategoryDto save(CategoryDto dto) {
+    public CategoryDto saveOrUpdate(CategoryDto dto) {
         Category category = ObjectHelper.convert(dto,Category.class);
         return ObjectHelper.convert(categoryRepository.save(category),CategoryDto.class);
     }
@@ -35,7 +36,17 @@ public class CategoryService implements ServiceImpl<CategoryDto> {
     }
 
     @Override
+    public CategoryDto loadByUUID(UUID uuid) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByUUID(UUID uuid) {
+
     }
 }

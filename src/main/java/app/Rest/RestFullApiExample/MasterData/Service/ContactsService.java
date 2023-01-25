@@ -1,19 +1,50 @@
 package app.Rest.RestFullApiExample.MasterData.Service;
 
+import app.Rest.RestFullApiExample.Helper.Exception.NoDataFoundException;
+import app.Rest.RestFullApiExample.Helper.Implement.ServiceImpl;
+import app.Rest.RestFullApiExample.Helper.Mapper.ObjectHelper;
+import app.Rest.RestFullApiExample.MasterData.DTO.ContactDto;
 import app.Rest.RestFullApiExample.MasterData.Model.Contacts;
 import app.Rest.RestFullApiExample.MasterData.Repository.ContactsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
-public class ContactsService {
+public class ContactsService implements ServiceImpl<ContactDto> {
 
     @Autowired
     private ContactsRepository contactsRepository;
 
     public List<Contacts> getAllContacts(){
         return contactsRepository.findAll();
+    }
+
+    @Override
+    public ContactDto saveOrUpdate(ContactDto object) {
+        Contacts contacts = ObjectHelper.convert(object,Contacts.class);
+        return ObjectHelper.convert(contactsRepository.save(contacts),ContactDto.class);
+    }
+
+    @Override
+    public ContactDto loadById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ContactDto loadByUUID(UUID id) {
+        return ObjectHelper.convert(contactsRepository.findById(id).orElseThrow(()-> new NoDataFoundException()),ContactDto.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public void deleteByUUID(UUID uuid) {
+        contactsRepository.deleteById(uuid);
     }
 }

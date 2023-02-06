@@ -2,7 +2,7 @@ package app.Rest.RestFullApiExample.Helper.Mapper;
 
 import org.modelmapper.ModelMapper;
 
-public class ObjectHelper {
+public final class ObjectHelper {
 
     // for copy dto to entity or otherwise
     public static <T> T convert(Object source, Class<T> destinationType) {

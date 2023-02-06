@@ -33,18 +33,9 @@ public class ActorService implements ServiceImpl<ActorDto> {
         return ObjectHelper.convert(actorRepository.findById(id).orElseThrow(()-> new NoDataFoundException()),ActorDto.class);
     }
 
-    @Override
-    public ActorDto loadByUUID(UUID uuid) {
-        return null;
-    }
 
     @Override
     public void delete(Long id) {
         actorRepository.deleteById(id);
-    }
-
-    @Override
-    public void deleteByUUID(UUID uuid) {
-
     }
 }

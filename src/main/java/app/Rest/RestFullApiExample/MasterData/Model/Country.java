@@ -22,4 +22,25 @@ public class Country extends Audit {
     @Column(name = "country")
     private String country;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Country)) return false;
+
+        Country country1 = (Country) o;
+
+        return getCountry() != null ? getCountry().equals(country1.getCountry()) : country1.getCountry() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getCountry() != null ? getCountry().hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "country='" + country + '\'' +
+                '}';
+    }
 }

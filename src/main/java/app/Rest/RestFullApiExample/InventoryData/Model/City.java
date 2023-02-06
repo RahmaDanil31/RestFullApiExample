@@ -24,4 +24,28 @@ public class City extends Audit {
     @JoinColumn(name = "country_id")
     private Country country;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+
+        City city1 = (City) o;
+
+        if (getCity() != null ? !getCity().equals(city1.getCity()) : city1.getCity() != null) return false;
+        return getCountry() != null ? getCountry().equals(city1.getCountry()) : city1.getCountry() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCity() != null ? getCity().hashCode() : 0;
+        result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "city='" + city + '\'' +
+                '}';
+    }
 }

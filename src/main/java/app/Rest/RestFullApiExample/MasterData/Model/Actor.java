@@ -30,4 +30,34 @@ public class Actor extends Audit {
     @ManyToMany(mappedBy = "actors" , cascade = { CascadeType.ALL })
     @JsonBackReference
     private Set<Film> films;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Actor)) return false;
+
+        Actor actor = (Actor) o;
+
+        if (getFirstName() != null ? !getFirstName().equals(actor.getFirstName()) : actor.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(actor.getLastName()) : actor.getLastName() != null)
+            return false;
+        return getFilms() != null ? getFilms().equals(actor.getFilms()) : actor.getFilms() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirstName() != null ? getFirstName().hashCode() : 0;
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getFilms() != null ? getFilms().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }

@@ -36,17 +36,8 @@ public class CategoryService implements ServiceImpl<CategoryDto> {
     }
 
     @Override
-    public CategoryDto loadByUUID(UUID uuid) {
-        return null;
-    }
-
-    @Override
     public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteByUUID(UUID uuid) {
-
-    }
 }

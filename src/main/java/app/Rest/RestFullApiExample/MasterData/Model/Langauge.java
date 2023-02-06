@@ -21,4 +21,25 @@ public class Langauge extends Audit {
     @Column(name = "name")
     private String name;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Langauge)) return false;
+
+        Langauge langauge = (Langauge) o;
+
+        return getName() != null ? getName().equals(langauge.getName()) : langauge.getName() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getName() != null ? getName().hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Langauge{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

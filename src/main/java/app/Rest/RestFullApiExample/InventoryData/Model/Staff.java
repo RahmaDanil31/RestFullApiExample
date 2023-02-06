@@ -50,4 +50,46 @@ public class Staff extends Audit {
     @OneToMany(mappedBy="staff")
     private Set<Store> stores;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Staff)) return false;
+
+        Staff staff = (Staff) o;
+
+        if (isActive() != staff.isActive()) return false;
+        if (getFirstName() != null ? !getFirstName().equals(staff.getFirstName()) : staff.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(staff.getLastName()) : staff.getLastName() != null)
+            return false;
+        if (getEmail() != null ? !getEmail().equals(staff.getEmail()) : staff.getEmail() != null) return false;
+        if (getUsername() != null ? !getUsername().equals(staff.getUsername()) : staff.getUsername() != null)
+            return false;
+        if (getPassword() != null ? !getPassword().equals(staff.getPassword()) : staff.getPassword() != null)
+            return false;
+        if (getAddress() != null ? !getAddress().equals(staff.getAddress()) : staff.getAddress() != null) return false;
+        return getStores() != null ? getStores().equals(staff.getStores()) : staff.getStores() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirstName() != null ? getFirstName().hashCode() : 0;
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (isActive() ? 1 : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (getStores() != null ? getStores().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -64,4 +64,58 @@ public class Film extends Audit {
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     @JsonManagedReference
     Set<Actor> actors;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Film)) return false;
+
+        Film film = (Film) o;
+
+        if (getTitle() != null ? !getTitle().equals(film.getTitle()) : film.getTitle() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(film.getDescription()) : film.getDescription() != null)
+            return false;
+        if (getReleaseYear() != null ? !getReleaseYear().equals(film.getReleaseYear()) : film.getReleaseYear() != null)
+            return false;
+        if (getRentalDuration() != null ? !getRentalDuration().equals(film.getRentalDuration()) : film.getRentalDuration() != null)
+            return false;
+        if (getRentalRate() != null ? !getRentalRate().equals(film.getRentalRate()) : film.getRentalRate() != null)
+            return false;
+        if (getLength() != null ? !getLength().equals(film.getLength()) : film.getLength() != null) return false;
+        if (getReplacementCost() != null ? !getReplacementCost().equals(film.getReplacementCost()) : film.getReplacementCost() != null)
+            return false;
+        if (getRating() != null ? !getRating().equals(film.getRating()) : film.getRating() != null) return false;
+        if (getLangauge() != null ? !getLangauge().equals(film.getLangauge()) : film.getLangauge() != null)
+            return false;
+        if (getSpecialFeatures() != null ? !getSpecialFeatures().equals(film.getSpecialFeatures()) : film.getSpecialFeatures() != null)
+            return false;
+        if (getFullText() != null ? !getFullText().equals(film.getFullText()) : film.getFullText() != null)
+            return false;
+        return getActors() != null ? getActors().equals(film.getActors()) : film.getActors() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getTitle() != null ? getTitle().hashCode() : 0;
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getReleaseYear() != null ? getReleaseYear().hashCode() : 0);
+        result = 31 * result + (getRentalDuration() != null ? getRentalDuration().hashCode() : 0);
+        result = 31 * result + (getRentalRate() != null ? getRentalRate().hashCode() : 0);
+        result = 31 * result + (getLength() != null ? getLength().hashCode() : 0);
+        result = 31 * result + (getReplacementCost() != null ? getReplacementCost().hashCode() : 0);
+        result = 31 * result + (getRating() != null ? getRating().hashCode() : 0);
+        result = 31 * result + (getLangauge() != null ? getLangauge().hashCode() : 0);
+        result = 31 * result + (getSpecialFeatures() != null ? getSpecialFeatures().hashCode() : 0);
+        result = 31 * result + (getFullText() != null ? getFullText().hashCode() : 0);
+        result = 31 * result + (getActors() != null ? getActors().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

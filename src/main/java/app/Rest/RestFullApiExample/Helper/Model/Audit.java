@@ -13,7 +13,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Audit implements Serializable {
+public abstract class Audit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package app.Rest.RestFullApiExample.InventoryData.Model;
 
 import app.Rest.RestFullApiExample.Helper.Model.Audit;
+import app.Rest.RestFullApiExample.Helper.Model.Name;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,17 +15,7 @@ import java.util.Date;
 @Table(name = "customer")
 @Getter
 @Setter
-public class Customer extends Audit {
-
-    @NotBlank
-    @Size(min = 3)
-    @Column(name = "first_name")
-    private String firstName;
-
-    @NotBlank
-    @Size(min = 3)
-    @Column(name = "last_name")
-    private String lastName;
+public class Customer extends Name {
 
     @NotBlank
     @Size(min = 3)
@@ -88,8 +79,8 @@ public class Customer extends Audit {
     @Override
     public String toString() {
         return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

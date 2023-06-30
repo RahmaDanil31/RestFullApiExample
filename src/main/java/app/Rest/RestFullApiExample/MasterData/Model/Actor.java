@@ -1,6 +1,7 @@
 package app.Rest.RestFullApiExample.MasterData.Model;
 
 import app.Rest.RestFullApiExample.Helper.Model.Audit;
+import app.Rest.RestFullApiExample.Helper.Model.Name;
 import app.Rest.RestFullApiExample.InventoryData.Model.Film;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
@@ -15,17 +16,7 @@ import java.util.Set;
 @Table(name = "actor")
 @Getter
 @Setter
-public class Actor extends Audit {
-
-    @NotBlank
-    @Size(min = 3)
-    @Column(name = "first_name")
-    private String firstName;
-
-    @NotBlank
-    @Size(min = 3)
-    @Column(name = "last_name")
-    private String lastName;
+public class Actor extends Name {
 
     @ManyToMany(mappedBy = "actors" , cascade = { CascadeType.ALL })
     @JsonBackReference
@@ -56,8 +47,8 @@ public class Actor extends Audit {
     @Override
     public String toString() {
         return "Actor{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
                 '}';
     }
 }

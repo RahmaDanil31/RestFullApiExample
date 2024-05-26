@@ -41,4 +41,6 @@ public class CategoryDto extends AuditDto {
                 "name='" + name + '\'' +
                 '}';
     }
+
+
 }

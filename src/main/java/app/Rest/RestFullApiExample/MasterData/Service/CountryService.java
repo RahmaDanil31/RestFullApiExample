@@ -3,7 +3,10 @@ package app.Rest.RestFullApiExample.MasterData.Service;
 import app.Rest.RestFullApiExample.Helper.Exception.NoDataFoundException;
 import app.Rest.RestFullApiExample.Helper.Implement.ServiceImpl;
 import app.Rest.RestFullApiExample.Helper.Mapper.ObjectHelper;
+import app.Rest.RestFullApiExample.Helper.Util.ResponseItem;
+import app.Rest.RestFullApiExample.MasterData.DTO.CategoryDto;
 import app.Rest.RestFullApiExample.MasterData.DTO.CountryDto;
+import app.Rest.RestFullApiExample.MasterData.Filter.CountryDtoFilter;
 import app.Rest.RestFullApiExample.MasterData.Model.Country;
 import app.Rest.RestFullApiExample.MasterData.Repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +16,30 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CountryService implements ServiceImpl<CountryDto> {
+public class CountryService{
 
     @Autowired
     private CountryRepository countryRepository;
 
-    public List<Country> getAllCountres(){
-        return countryRepository.findAll();
+    public ResponseItem get(CountryDtoFilter filter){
+        int count = countryRepository.count(filter);
+        ResponseItem responseItem = new ResponseItem();
+
+        responseItem.setMeta(ResponseItem.Meta.builder()
+                .totalItems(count)
+                .currentPage(filter.getCurrentPage())
+                .itemsPerPage(filter.getItemsPerPage())
+                .totalPages((int) Math.ceil((float) count / filter.getItemsPerPage()))
+                .build());
+
+        List<CountryDto> countryDtos = ObjectHelper.convertList(countryRepository.view(filter,filter.buildPage(false)), CountryDto.class);
+
+        responseItem.setItems(countryDtos);
+
+        return responseItem;
     }
 
-    @Override
-    public CountryDto saveOrUpdate(CountryDto object) {
-        Country country = ObjectHelper.convert(object,Country.class);
-        return ObjectHelper.convert(countryRepository.save(country),CountryDto.class);
-    }
-
-    @Override
     public CountryDto loadById(Long id) {
         return ObjectHelper.convert(countryRepository.findById(id).orElseThrow(()->new NoDataFoundException()),CountryDto.class);
-    }
-
-    @Override
-    public CountryDto loadByUUID(UUID uuid) {
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
-        countryRepository.deleteById(id);
-    }
-
-    @Override
-    public void deleteByUUID(UUID uuid) {
-
     }
 }

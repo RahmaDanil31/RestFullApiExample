@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @MappedSuperclass
@@ -19,8 +21,7 @@ public abstract class Audit implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update", nullable = false)
     @LastModifiedDate
-    private Date updatedAt;
+    private LocalDateTime lastUpdate;
 }
